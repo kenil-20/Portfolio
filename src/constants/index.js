@@ -216,21 +216,21 @@ const testimonials = [
     mentions: "Founder - Omeecron Solutions",
     review:
       "During the internship, he consistently delivered his tasks on time and showed strong ownership of his work. His skills in React and UI development improved rapidly and visible in the final output.",
-    // imgPath: "/images/client3.png",
+    imgPath: "/images/client3.png",
   },
   {
     name: "Chirag Dhameliya",
     mentions: "Project Manager",
     review:
       "His attention to detail and eagerness to solve problems made the development process smoother. Whether it was UI polishing or bug fixing, he approached every task with enthusiasm.",
-    // imgPath: "/images/client4.png",
+    imgPath: "/images/client4.png",
   },
   {
     name: "Krish Kukadiya",
     mentions: "Team Lead",
     review:
       "He was a quick learner and adapted well to our workflow. His contribution to our Shopify and frontend modules was noteworthy. A hardworking fresher with a strong foundation.",
-    // imgPath: "/images/client5.png",
+    imgPath: "/images/client5.png",
   },
 ];
 
