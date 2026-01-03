@@ -70,7 +70,11 @@ const Experience = () => {
                 <div className="xl:w-2/6">
                   <GlowCard card={card}>
                     <div>
-                      <img src={card.imgPath} alt="exp-img" />
+                      <img
+                        src={card.imgPath}
+                        alt="exp-img"
+                        className="shadow-[0_5px_15px_rgba(255,255,255,0.15)] rounded-lg"
+                      />
                     </div>
                   </GlowCard>
                 </div>

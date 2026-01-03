@@ -215,7 +215,7 @@ const testimonials = [
     name: "Sandeep Dhameliya",
     mentions: "Founder - Omeecron Solutions",
     review:
-      "During the internship, he consistently delivered his tasks on time and showed strong ownership of his work. His skills in React and UI development improved rapidly and were visible in the final output.",
+      "During the internship, he consistently delivered his tasks on time and showed strong ownership of his work. His skills in React and UI development improved rapidly and visible in the final output.",
     // imgPath: "/images/client3.png",
   },
   {
