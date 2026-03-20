@@ -97,7 +97,7 @@ const techStackImgs = [
     imgPath: "/images/logos/react.png",
   },
   {
-    name: "Python Developer",
+    name: "Frontend Developer",
     imgPath: "/images/logos/python.svg",
   },
   {
@@ -116,16 +116,22 @@ const techStackImgs = [
 
 const techStackIcons = [
   {
-    name: "React Developer",
-    modelPath: "/models/react_logo-transformed.glb",
-    scale: 1,
-    rotation: [0, 0, 0],
-  },
-  {
     name: "HTML Developer",
     modelPath: "/models/html-svgrepo-com.glb",
     scale: 0.9,
     rotation: [900, 100, 0],
+  },
+  {
+    name: "Design Developer",
+    modelPath: "/models/css-3-svgrepo-com.glb",
+    scale: 0.9,
+    rotation: [900, -100, 0],
+  },
+  {
+    name: "React Developer",
+    modelPath: "/models/react_logo-transformed.glb",
+    scale: 1,
+    rotation: [0, 0, 0],
   },
   {
     name: "Backend Developer",
@@ -134,16 +140,10 @@ const techStackIcons = [
     rotation: [0, -Math.PI / 2, 0],
   },
   {
-    name: "Interactive Developer",
+    name: "Shopify Frontend Developer",
     modelPath: "/models/three.js-transformed.glb",
     scale: 0.05,
     rotation: [0, 0, 0],
-  },
-  {
-    name: "Design Developer",
-    modelPath: "/models/css-3-svgrepo-com.glb",
-    scale: 0.9,
-    rotation: [900, -100, 0],
   },
 ];
 

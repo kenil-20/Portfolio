@@ -1,59 +1,75 @@
-import { useRef } from "react";
-import gsap from "gsap";
-import { useGSAP } from "@gsap/react";
-import { ScrollTrigger } from "gsap/all";
-
+import { useEffect, useRef, useState } from "react";
 import { counterItems } from "../constants";
 
-gsap.registerPlugin(ScrollTrigger);
-
 const AnimatedCounter = () => {
-  const counterRef = useRef(null);
-  const countersRef = useRef([]);
+  const [isVisible, setIsVisible] = useState(false);
+  const [counts, setCounts] = useState(counterItems.map(() => 0));
+  const sectionRef = useRef(null);
 
-  useGSAP(() => {
-    countersRef.current.forEach((counter, index) => {
-      const numberElement = counter.querySelector(".counter-number");
-      const item = counterItems[index];
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+        }
+      },
+      { threshold: 0.3 },
+    );
 
-      // Set initial value to 0
-      gsap.set(numberElement, { innerText: "0" });
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
 
-      // Create the counting animation
-      gsap.to(numberElement, {
-        innerText: item.value,
-        duration: 2.5,
-        ease: "power2.out",
-        snap: { innerText: 1 }, // Ensures whole numbers
-        scrollTrigger: {
-          trigger: "#counter",
-          start: "top center",
-        },
-        // Add the suffix after counting is complete
-        onComplete: () => {
-          numberElement.textContent = `${item.value}${item.suffix}`;
-        },
-      });
-    }, counterRef);
+    return () => observer.disconnect();
   }, []);
 
+  useEffect(() => {
+    if (!isVisible) return;
+
+    const intervals = counterItems.map((item, index) => {
+      const increment = Math.ceil(item.value / 50); // Count to target in ~50 steps
+      return setInterval(() => {
+        setCounts((prev) => {
+          const newCounts = [...prev];
+          if (newCounts[index] < item.value) {
+            newCounts[index] = Math.min(
+              newCounts[index] + increment,
+              item.value,
+            );
+          }
+          return newCounts;
+        });
+      }, 30);
+    });
+
+    return () => intervals.forEach(clearInterval);
+  }, [isVisible]);
+
   return (
-    <div id="counter" ref={counterRef} className="padding-x-lg xl:mt-0 mt-32">
-      <div className="mx-auto grid-4-cols">
-        {counterItems.map((item, index) => (
-          <div
-            key={index}
-            ref={(el) => el && (countersRef.current[index] = el)}
-            className="bg-zinc-900 rounded-lg p-10 flex flex-col justify-center"
-          >
-            <div className="counter-number text-white-50 text-5xl font-bold mb-2">
-              0 {item.suffix}
+    <section
+      ref={sectionRef}
+      id="counter"
+      className="py-16 bg-gradient-to-b from-transparent to-gray-900/50"
+    >
+      <div className="max-w-6xl mx-auto px-4">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+          {counterItems.map((item, index) => (
+            <div key={index} className="relative group">
+              <div className="absolute inset-0 bg-gradient-to-r from-purple-600/20 to-blue-600/20 rounded-2xl blur-xl group-hover:blur-2xl transition-all" />
+              <div className="relative bg-gray-800/50 backdrop-blur-sm rounded-2xl p-6 text-center border border-white/10 group-hover:border-white/20 transition-all">
+                <div className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent mb-2">
+                  {counts[index]}
+                  {item.suffix}
+                </div>
+                <div className="text-sm md:text-base text-gray-400">
+                  {item.label}
+                </div>
+              </div>
             </div>
-            <div className="text-white-50 text-lg">{item.label}</div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
-    </div>
+    </section>
   );
 };
 
