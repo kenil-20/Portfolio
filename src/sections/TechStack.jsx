@@ -39,12 +39,15 @@ const TechStack = () => {
   }, []);
 
   return (
-    <section id="skills" className="py-20 bg-gray-900">
+    <section
+      id="skills"
+      className="py-12 md:py-20 lg:py-24 overflow-hidden bg-gray-900"
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header - New Style */}
         <div
           ref={sectionRef}
-          className="text-center mb-16 opacity-0 translate-y-10 transition-all duration-700"
+          className="text-center mb-12 md:mb-16 opacity-0 translate-y-10 transition-all duration-700"
         >
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 backdrop-blur-sm border border-white/10 mb-4">
             <span className="w-2 h-2 rounded-full bg-purple-500 animate-pulse" />

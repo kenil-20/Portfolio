@@ -40,10 +40,10 @@ const FeatureCards = () => {
   };
 
   return (
-    <section className="py-20 bg-black">
+    <section className="py-12 md:py-20 lg:py-24 bg-black overflow-hidden">
       <div ref={sectionRef} className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header - Custom with proper styling */}
-        <div className="text-center mb-16">
+        <div className="text-center mb-12 md:mb-16">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 backdrop-blur-sm border border-white/10 mb-4">
             <span className="w-2 h-2 rounded-full bg-purple-500 animate-pulse" />
             <span className="text-sm text-purple-400 font-semibold uppercase tracking-wider">

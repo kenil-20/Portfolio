@@ -363,7 +363,7 @@ const Hero = () => {
       </div>
 
       {/* Scroll indicator */}
-      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2">
+      {/* <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2">
         <div
           onClick={() => {
             const element = document.querySelector("#work");
@@ -371,7 +371,7 @@ const Hero = () => {
               element.scrollIntoView({ behavior: "smooth", block: "start" });
             }
           }}
-          className="flex flex-col items-center gap-2 opacity-50 hover:opacity-100 transition-all duration-500 cursor-pointer group"
+          className="flex sm:flex-col items-center gap-2 opacity-50 hover:opacity-100 transition-all duration-500 cursor-pointer group"
         >
           <span className="text-xs text-gray-400 group-hover:text-white tracking-wider">
             DISCOVER MORE
@@ -380,7 +380,7 @@ const Hero = () => {
             <div className="w-1 h-2 bg-gradient-to-b from-purple-400 to-blue-400 rounded-full mt-2 animate-scroll-smooth" />
           </div>
         </div>
-      </div>
+      </div> */}
     </section>
   );
 };

@@ -105,7 +105,10 @@ const ShowcaseSection = () => {
   };
 
   return (
-    <section id="work" className="relative py-24 overflow-hidden">
+    <section
+      id="work"
+      className="relative py-12 md:py-20 lg:py-24 overflow-hidden"
+    >
       {/* Animated Background */}
       <div className="absolute inset-0">
         <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-gray-900 via-purple-900/5 to-gray-900" />
@@ -117,7 +120,7 @@ const ShowcaseSection = () => {
         {/* Section Header */}
         <div
           ref={sectionRef}
-          className="text-center mb-16 opacity-0 translate-y-10 transition-all duration-700"
+          className="text-center mb-12 md:mb-16 opacity-0 translate-y-10 transition-all duration-700"
         >
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 backdrop-blur-sm border border-white/10 mb-4">
             <span className="w-2 h-2 rounded-full bg-purple-500 animate-pulse" />
@@ -284,7 +287,7 @@ const ShowcaseSection = () => {
         </div>
 
         {/* View All Projects Button */}
-        <div className="text-center mt-16">
+        <div className="text-center mt-8 sm:mt-16">
           <a
             href={githubUrl}
             target="_blank"
@@ -298,9 +301,7 @@ const ShowcaseSection = () => {
                 clipRule="evenodd"
               />
             </svg>
-            <span className="text-white font-medium">
-              View All Projects on GitHub
-            </span>
+            <span className="text-white font-medium">View Projects</span>
             <svg
               className="w-5 h-5 text-purple-400 group-hover:translate-x-1 transition-transform"
               fill="none"

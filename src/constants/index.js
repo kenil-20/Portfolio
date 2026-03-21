@@ -97,19 +97,19 @@ const techStackImgs = [
     imgPath: "/images/logos/react.png",
   },
   {
-    name: "Frontend Developer",
-    imgPath: "/images/logos/python.svg",
-  },
-  {
-    name: "Backend Developer",
+    name: "Node.js Developer",
     imgPath: "/images/logos/node.png",
   },
   {
-    name: "Interactive Developer",
+    name: "Three.js Developer",
     imgPath: "/images/logos/three.png",
   },
   {
-    name: "Project Manager",
+    name: "Tailwind CSS",
+    imgPath: "/images/logos/Tailwind_CSS_Logo.svg.png",
+  },
+  {
+    name: "Git Expert",
     imgPath: "/images/logos/git.svg",
   },
 ];
@@ -140,7 +140,7 @@ const techStackIcons = [
     rotation: [0, -Math.PI / 2, 0],
   },
   {
-    name: "Shopify Frontend Developer",
+    name: "Shopify Developer",
     modelPath: "/models/three.js-transformed.glb",
     scale: 0.05,
     rotation: [0, 0, 0],
@@ -149,10 +149,22 @@ const techStackIcons = [
 
 const expCards = [
   {
+    title: "Full Stack Developer",
+    review: "Freelancer | Self-Employed",
+    date: "Aug 2025 - Present",
+    logoPath: "/images/freelancer.jpg",
+    responsibilities: [
+      "Developed and deployed full-stack web applications for clients across various industries",
+      "Built responsive, user-friendly interfaces using React.js, Next.js, and Tailwind CSS",
+      "Created RESTful APIs and integrated third-party services for enhanced functionality",
+      "Managed database design and optimization using MongoDB, PostgreSQL, and MySQL",
+    ],
+  },
+  {
     review: "CrawlApps Shopify-Agency",
     imgPath: "/images/CwawlApps.png",
     logoPath: "/images/Crawl-Logo.jpeg",
-    title: "Shopify Frontend Developer",
+    title: "Shopify Developer",
     date: "May 2025 - July 2025",
     responsibilities: [
       "Customized Shopify themes using Liquid, HTML, CSS, and JavaScript to enhance storefront design.",
