@@ -131,8 +131,7 @@ const Hero = () => {
               user-friendly digital experiences that captivate and inspire. With
               8 months of hands-on web development experience and a B.E./B.Tech
               degree in IT, I bring both practical skills and strong technical
-              knowledge. I’m constantly exploring new technologies and pushing
-              myself to create better, more efficient solutions.
+              knowledge.
             </p>
 
             {/* CTA Buttons */}
@@ -147,7 +146,7 @@ const Hero = () => {
                     });
                   }
                 }}
-                className="group relative px-8 py-4 bg-gradient-to-r from-purple-600 to-blue-600 text-white rounded-full font-medium overflow-hidden transition-all duration-500 hover:shadow-lg hover:shadow-purple-500/25 hover:scale-105"
+                className="group relative px-8 py-2 sm:py-4 bg-gradient-to-r from-purple-600 to-blue-600 text-white rounded-full font-medium overflow-hidden transition-all duration-500 hover:shadow-lg hover:shadow-purple-500/25 hover:scale-105"
               >
                 <span className="relative z-10 flex items-center gap-2 justify-center">
                   Explore My Work
@@ -178,7 +177,7 @@ const Hero = () => {
                     });
                   }
                 }}
-                className="group px-8 py-4 border-2 border-white/10 text-white rounded-full font-medium hover:bg-white/5 hover:border-purple-500/30 transition-all duration-500 text-center relative overflow-hidden"
+                className="group px-8 py-2 sm:py-4 border-2 border-white/10 text-white rounded-full font-medium hover:bg-white/5 hover:border-purple-500/30 transition-all duration-500 text-center relative overflow-hidden"
               >
                 <span className="relative z-10 flex items-center gap-2 justify-center">
                   Let's Connect

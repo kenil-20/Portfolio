@@ -44,7 +44,7 @@ const Experience = () => {
             </span>
           </div>
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
-            My Professional
+            My Work
             <span className="bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent ml-2">
               Journey
             </span>
