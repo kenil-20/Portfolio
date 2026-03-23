@@ -451,9 +451,6 @@ const Experience = () => {
                           ))}
                       </div>
                     </div>
-
-                    {/* Bottom Gradient Line on Hover */}
-                    <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-purple-600 to-blue-600 rounded-b-xl scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left" />
                   </div>
                 </div>
               );
