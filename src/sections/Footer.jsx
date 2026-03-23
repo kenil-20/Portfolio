@@ -26,7 +26,7 @@ const Footer = () => {
                   <img
                     src={social.imgPath}
                     alt={social.name}
-                    className="w-5 h-5 filter brightness-0 invert opacity-70 group-hover:opacity-100 transition-opacity"
+                    className="w-5 h-5 object-contain opacity-70 rounded-sm group-hover:opacity-100 transition-opacity"
                   />
                 </div>
               </a>

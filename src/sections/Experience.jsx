@@ -7,9 +7,13 @@ const Experience = () => {
   const [windowWidth, setWindowWidth] = useState(
     typeof window !== "undefined" ? window.innerWidth : 0,
   );
+  const [isTransitioning, setIsTransitioning] = useState(false);
   const sliderRef = useRef(null);
   const sectionRef = useRef(null);
   const autoPlayRef = useRef(null);
+  const touchStartX = useRef(0);
+  const touchEndX = useRef(0);
+  const transitionTimeoutRef = useRef(null);
 
   const totalCards = expCards.length;
 
@@ -28,6 +32,7 @@ const Experience = () => {
   };
 
   const cardsToShow = getCardsToShow();
+  const isMobileOrTablet = windowWidth < 1024;
 
   // Get visible cards based on current index and screen size
   const getVisibleCards = () => {
@@ -45,11 +50,11 @@ const Experience = () => {
 
   const visibleCards = getVisibleCards();
 
-  // Auto-slide functionality
+  // Auto-slide functionality - only on desktop
   useEffect(() => {
-    if (!isHovered) {
+    if (!isMobileOrTablet && !isHovered && !isTransitioning) {
       autoPlayRef.current = setInterval(() => {
-        setCurrentIndex((prev) => (prev + 1) % totalCards);
+        nextSlide();
       }, 4000);
     }
     return () => {
@@ -57,18 +62,71 @@ const Experience = () => {
         clearInterval(autoPlayRef.current);
       }
     };
-  }, [isHovered, totalCards]);
+  }, [isHovered, totalCards, isMobileOrTablet, isTransitioning]);
 
   const goToSlide = (index) => {
+    if (isTransitioning) return;
+    setIsTransitioning(true);
     setCurrentIndex(index);
+
+    // Reset transition state after animation completes
+    if (transitionTimeoutRef.current) {
+      clearTimeout(transitionTimeoutRef.current);
+    }
+    transitionTimeoutRef.current = setTimeout(() => {
+      setIsTransitioning(false);
+    }, 500);
   };
 
   const nextSlide = () => {
+    if (isTransitioning) return;
+    setIsTransitioning(true);
     setCurrentIndex((prev) => (prev + 1) % totalCards);
+
+    setTimeout(() => {
+      setIsTransitioning(false);
+    }, 500);
   };
 
   const prevSlide = () => {
+    if (isTransitioning) return;
+    setIsTransitioning(true);
     setCurrentIndex((prev) => (prev - 1 + totalCards) % totalCards);
+
+    setTimeout(() => {
+      setIsTransitioning(false);
+    }, 500);
+  };
+
+  // Touch handlers for swipe functionality
+  const handleTouchStart = (e) => {
+    if (isTransitioning) return;
+    touchStartX.current = e.touches[0].clientX;
+  };
+
+  const handleTouchMove = (e) => {
+    touchEndX.current = e.touches[0].clientX;
+  };
+
+  const handleTouchEnd = () => {
+    if (!touchStartX.current || !touchEndX.current || isTransitioning) return;
+
+    const swipeDistance = touchEndX.current - touchStartX.current;
+    const minSwipeDistance = 50; // Minimum distance for swipe to register
+
+    if (Math.abs(swipeDistance) > minSwipeDistance) {
+      if (swipeDistance > 0) {
+        // Swipe right - go to previous slide
+        prevSlide();
+      } else {
+        // Swipe left - go to next slide
+        nextSlide();
+      }
+    }
+
+    // Reset values
+    touchStartX.current = 0;
+    touchEndX.current = 0;
   };
 
   useEffect(() => {
@@ -129,15 +187,19 @@ const Experience = () => {
         {/* Carousel Container */}
         <div
           className="relative mt-8 md:mt-12 lg:mt-16"
-          onMouseEnter={() => setIsHovered(true)}
-          onMouseLeave={() => setIsHovered(false)}
+          onMouseEnter={() => !isMobileOrTablet && setIsHovered(true)}
+          onMouseLeave={() => !isMobileOrTablet && setIsHovered(false)}
+          onTouchStart={isMobileOrTablet ? handleTouchStart : undefined}
+          onTouchMove={isMobileOrTablet ? handleTouchMove : undefined}
+          onTouchEnd={isMobileOrTablet ? handleTouchEnd : undefined}
         >
           {/* Navigation Buttons - Hidden on mobile if only 1 card */}
           {cardsToShow > 1 && (
             <>
               <button
                 onClick={prevSlide}
-                className="absolute left-0 top-1/2 -translate-y-1/2 z-30 bg-gray-800/90 hover:bg-purple-600 text-white rounded-full p-2 md:p-3 backdrop-blur-sm transition-all duration-300 hover:scale-110 -ml-3 md:-ml-6 shadow-lg"
+                disabled={isTransitioning}
+                className="absolute left-0 top-1/2 -translate-y-1/2 z-30 bg-gray-800/90 hover:bg-purple-600 text-white rounded-full p-2 md:p-3 backdrop-blur-sm transition-all duration-300 hover:scale-110 -ml-3 md:-ml-6 shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
                 aria-label="Previous"
               >
                 <svg
@@ -157,7 +219,8 @@ const Experience = () => {
 
               <button
                 onClick={nextSlide}
-                className="absolute right-0 top-1/2 -translate-y-1/2 z-30 bg-gray-800/90 hover:bg-purple-600 text-white rounded-full p-2 md:p-3 backdrop-blur-sm transition-all duration-300 hover:scale-110 -mr-3 md:-mr-6 shadow-lg"
+                disabled={isTransitioning}
+                className="absolute right-0 top-1/2 -translate-y-1/2 z-30 bg-gray-800/90 hover:bg-purple-600 text-white rounded-full p-2 md:p-3 backdrop-blur-sm transition-all duration-300 hover:scale-110 -mr-3 md:-mr-6 shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
                 aria-label="Next"
               >
                 <svg
@@ -177,15 +240,20 @@ const Experience = () => {
             </>
           )}
 
-          {/* Carousel Track */}
+          {/* Carousel Track - With smooth transitions */}
           <div
             className={`flex justify-center items-center gap-3 md:gap-4 lg:gap-6 px-2 md:px-4 lg:px-8 ${cardsToShow === 1 ? "px-0" : ""}`}
+            style={{
+              transition: isTransitioning
+                ? "all 0.5s cubic-bezier(0.4, 0, 0.2, 1)"
+                : "none",
+            }}
           >
             {visibleCards.map((card, idx) => {
               const isCenter = isCenterCard(idx);
               const isMobile = cardsToShow === 1;
 
-              // Responsive width classes - INCREASED WIDTH ON DESKTOP
+              // Responsive width classes
               let widthClass = "";
               if (isMobile) {
                 widthClass = "w-full";
@@ -195,14 +263,19 @@ const Experience = () => {
                   : "w-full md:w-3/4 lg:w-2/3 hidden md:block mx-auto";
               } else {
                 widthClass = isCenter
-                  ? "w-full md:w-3/4 lg:w-2/3 xl:w-3/5 mx-auto" // Increased width for center card on desktop
-                  : "w-full md:w-2/5 lg:w-1/2 xl:w-2/5 hidden md:block"; // Increased width for side cards
+                  ? "w-full md:w-3/4 lg:w-2/3 xl:w-3/5 mx-auto"
+                  : "w-full md:w-2/5 lg:w-1/2 xl:w-2/5 hidden md:block";
               }
 
               return (
                 <div
                   key={`${card.originalIndex}-${idx}`}
-                  className={`transition-all duration-500 ${widthClass}`}
+                  className={`transition-all duration-500 ease-out ${widthClass} ${
+                    isTransitioning ? "scale-98" : "scale-100"
+                  }`}
+                  style={{
+                    transition: "all 0.5s cubic-bezier(0.4, 0, 0.2, 1)",
+                  }}
                 >
                   <div
                     className={`group relative bg-gray-800/40 rounded-xl p-4 sm:p-5 md:p-6 lg:p-7 border transition-all duration-500 hover:shadow-xl h-full flex flex-col ${
@@ -210,6 +283,9 @@ const Experience = () => {
                         ? "border-purple-500/70 shadow-xl shadow-purple-500/20 scale-100 z-20"
                         : "border-gray-700 hover:border-purple-500/30 scale-95 opacity-70 hover:opacity-90"
                     }`}
+                    style={{
+                      transition: "all 0.5s cubic-bezier(0.4, 0, 0.2, 1)",
+                    }}
                   >
                     {/* Glow Effect on Hover */}
                     <div className="absolute inset-0 bg-gradient-to-r from-purple-600/0 via-purple-600/0 to-blue-600/0 rounded-xl group-hover:from-purple-600/10 group-hover:via-purple-600/5 group-hover:to-blue-600/10 transition-all duration-700" />
@@ -318,7 +394,7 @@ const Experience = () => {
                               key={idx}
                               className={`flex items-start gap-1.5 sm:gap-2 text-gray-400 group-hover:text-gray-300 transition-colors duration-500 ${
                                 isCenter
-                                  ? "text-xs sm:text-sm md:text-base lg:text-lg"
+                                  ? "text-xs sm:text-sm md:text-base lg:text-md"
                                   : "text-[11px] sm:text-xs md:text-sm"
                               }`}
                             >
@@ -390,11 +466,12 @@ const Experience = () => {
               <button
                 key={index}
                 onClick={() => goToSlide(index)}
+                disabled={isTransitioning}
                 className={`h-1.5 sm:h-2 rounded-full transition-all duration-300 ${
                   currentIndex === index
                     ? "w-4 sm:w-6 md:w-8 lg:w-10 bg-gradient-to-r from-purple-500 to-blue-500"
                     : "w-1.5 sm:w-2 bg-gray-600 hover:bg-gray-500"
-                }`}
+                } disabled:opacity-50 disabled:cursor-not-allowed`}
                 aria-label={`Go to slide ${index + 1}`}
               />
             ))}

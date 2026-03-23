@@ -29,7 +29,7 @@ const ShowcaseSection = () => {
         "Order tracking",
         "Admin panel",
       ],
-      githubRepo: `${githubUrl}/ecommerce-platform`,
+      githubRepo: "https://github.com/kenil-20/E-commerce-Forever-",
       demoAvailable: false,
     },
     {
@@ -50,7 +50,7 @@ const ShowcaseSection = () => {
         "Billing",
         "Prescriptions",
       ],
-      githubRepo: `${githubUrl}/hospital-management`,
+      githubRepo: "https://github.com/kenil-20/Hospital-Full_Stack-Web_App",
       demoAvailable: false,
     },
     {
@@ -70,7 +70,7 @@ const ShowcaseSection = () => {
         "Dark/Light mode",
         "Project filtering",
       ],
-      githubRepo: `${githubUrl}/developer-portfolio`,
+      githubRepo: "https://github.com/kenil-20/Portfolio",
       demoAvailable: true,
       demoLink: "#",
     },
@@ -101,7 +101,7 @@ const ShowcaseSection = () => {
   }, []);
 
   const openGitHub = (repoUrl) => {
-    window.open(repoUrl, "_blank", "noopener,noreferrer");
+    window.open(repoUrl || "https://github.com/kenil-20", "_blank");
   };
 
   return (
@@ -246,7 +246,7 @@ const ShowcaseSection = () => {
                     <div className="flex items-center justify-between pt-4 border-t border-gray-800 mt-2">
                       <button
                         onClick={() => openGitHub(project.githubRepo)}
-                        className="text-sm text-purple-400 hover:text-purple-300 transition-colors flex items-center gap-2 group/btn"
+                        className="text-sm text-purple-400 hover:text-purple-300 cursor-pointer transition-colors flex items-center gap-2 group/btn"
                       >
                         <svg
                           className="w-4 h-4"
