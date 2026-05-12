@@ -423,8 +423,8 @@ const Experience = () => {
                           card.techStack || [
                             "React",
                             "Node.js",
-                            "Laravel",
-                            "Shopify",
+                            "Express",
+                            "MongoDB",
                           ]
                         )
                           .slice(
