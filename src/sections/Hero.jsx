@@ -129,7 +129,7 @@ const Hero = () => {
             <p className="fade-in opacity-0 translate-y-5 transition-all duration-700 delay-300 text-gray-400 text-lg md:text-xl mb-8 max-w-2xl lg:mx-0 mx-auto leading-relaxed">
               Hi, I'm Kenil. I transform complex problems into elegant,
               user-friendly digital experiences that captivate and inspire. With
-              8 months of hands-on web development experience and a B.E./B.Tech
+              1+ years of hands-on web development experience and a B.E./B.Tech
               degree in IT, I bring both practical skills and strong technical
               knowledge.
             </p>
