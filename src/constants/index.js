@@ -154,10 +154,10 @@ const expCards = [
     date: "Aug 2025 - Present",
     logoPath: "/images/freelancer.jpg",
     responsibilities: [
-      "Developed and deployed full-stack web applications for clients across various industries",
-      "Built responsive, user-friendly interfaces using React.js, Next.js, and Tailwind CSS",
-      "Created RESTful APIs and integrated third-party services for enhanced functionality",
-      "Managed database design and optimization using MongoDB, PostgreSQL, and MySQL",
+      "Developed full-stack web applications and CRM systems",
+      "Created APIs, dashboards, and business management features",
+      "Implemented lead, deal, task, meeting, and invoice functionalities",
+      "Managed databases using MongoDB.",
     ],
   },
   {
